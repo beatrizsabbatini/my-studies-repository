@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="154.627" height="42.5" viewBox="0 0 154.627 42.5">
+  <defs>
+    <filter id="My_Studies" x="0" y="0" width="122" height="36" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Repository" x="107.5" y="27.5" width="47" height="15" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur-2"/>
+      <feFlood flood-color="#6e6e6e" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_38" x="136.966" y="5.349" width="15.502" height="25.614" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur-3"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_39" x="138.728" y="7.903" width="15.899" height="23.277" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur-4"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_40" x="126.6" y="5.349" width="15.502" height="25.614" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur-5"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_41" x="124.44" y="7.903" width="15.906" height="23.276" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur-6"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_36" data-name="Grupo 36" transform="translate(-135 -15)">
+    <g id="Grupo_9" data-name="Grupo 9" transform="translate(45 -5)">
+      <g transform="matrix(1, 0, 0, 1, 90, 20)" filter="url(#My_Studies)">
+        <text id="My_Studies-2" data-name="My Studies" transform="translate(61 25)" fill="#ac87d2" font-size="22" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-57.036" y="0">My Studies</tspan></text>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 90, 20)" filter="url(#Repository)">
+        <text id="Repository-2" data-name="Repository" transform="translate(131 38)" fill="#989898" font-size="12" font-family="Microsoft-Yi-Baiti, Microsoft Yi Baiti" font-style="italic"><tspan x="-21.48" y="0">Repository</tspan></text>
+      </g>
+      <g id="Grupo_8" data-name="Grupo 8" transform="translate(217.44 26.349)">
+        <g id="book">
+          <g transform="matrix(1, 0, 0, 1, -127.44, -6.35)" filter="url(#Caminho_38)">
+            <path id="Caminho_38-2" data-name="Caminho 38" d="M241.5,17.272V0l-.659.055a25.346,25.346,0,0,0-7.683,1.873L232,2.41v17.2l.845-.351a26.367,26.367,0,0,1,7.947-1.932Zm0,0" transform="translate(-92.03 6.35)" fill="#8f6d9e"/>
+          </g>
+          <g transform="matrix(1, 0, 0, 1, -127.44, -6.35)" filter="url(#Caminho_39)">
+            <path id="Caminho_39-2" data-name="Caminho 39" d="M274.54,47.3h-1.3V62.413a.432.432,0,0,1-.4.432l-1.106.091q-.479.04-.955.1c-.1.012-.205.029-.307.043-.214.028-.427.057-.64.091-.124.02-.247.043-.371.065-.19.033-.381.066-.571.1-.13.026-.259.055-.391.083-.181.038-.362.078-.542.12-.135.032-.269.066-.4.1-.175.043-.349.09-.523.138-.135.037-.27.076-.405.116-.173.051-.343.1-.514.157l-.4.129q-.256.086-.51.178l-.392.144-.177.07h9.9Zm0,0" transform="translate(-122.91 -38.39)" fill="#8f6d9e"/>
+          </g>
+          <g transform="matrix(1, 0, 0, 1, -127.44, -6.35)" filter="url(#Caminho_40)">
+            <path id="Caminho_40-2" data-name="Caminho 40" d="M40.659.055,40,0V17.274l.767.065a26.19,26.19,0,0,1,7.939,1.944l.8.331V2.41l-1.159-.481A25.345,25.345,0,0,0,40.659.055Zm0,0" transform="translate(89.6 6.35)" fill="#8f6d9e"/>
+          </g>
+          <g transform="matrix(1, 0, 0, 1, -127.44, -6.35)" filter="url(#Caminho_41)">
+            <path id="Caminho_41-2" data-name="Caminho 41" d="M0,47.3V64.573H9.906c-.053-.021-.106-.043-.16-.063-.124-.047-.248-.092-.373-.137-.175-.064-.351-.126-.527-.185q-.192-.065-.384-.126-.263-.086-.527-.162c-.13-.038-.259-.076-.389-.112-.178-.049-.356-.1-.534-.142-.129-.033-.259-.067-.392-.1-.181-.043-.363-.083-.545-.122-.129-.028-.259-.057-.389-.082-.188-.037-.377-.07-.567-.1l-.372-.065c-.209-.033-.418-.061-.628-.089-.106-.014-.211-.031-.317-.043q-.475-.058-.95-.1l-1.163-.1a.432.432,0,0,1-.4-.432V47.3Zm0,0" transform="translate(127.44 -38.39)" fill="#8f6d9e"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
