@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: metrics.baseMargin,
   },
   textInput: {
-    height: 30,
     width: '100%',
     marginVertical: metrics.baseMargin,
   },
