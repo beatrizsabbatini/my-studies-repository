@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import styles from './styles';
 
-const ThemeItem = ({ item, navigation }) => {
+const ThemeItem = ({ item, navigation, isMyProfile }) => {
   return (
     <TouchableOpacity
       style={styles.themeContainer}
@@ -11,6 +11,7 @@ const ThemeItem = ({ item, navigation }) => {
         navigation.navigate('ThemeTopics', {
           picture: item.themePicture,
           name: item.themeName,
+          isMyProfile: isMyProfile,
         })
       }
     >

@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import ThemeItem from '../ThemeItem';
 import styles from './styles';
 
-const ThemesList = ({ userId, userName, navigation }) => {
+const ThemesList = ({ userId, userName, navigation, isMyProfile }) => {
   const numberOfColumns = 3;
   const mockUserData = {
     id: userId,
@@ -60,7 +60,11 @@ const ThemesList = ({ userId, userName, navigation }) => {
       numColumns={numberOfColumns}
       keyExtractor={(item) => item.themeId.toString()}
       renderItem={({ item }) => (
-        <ThemeItem item={item} navigation={navigation} />
+        <ThemeItem
+          item={item}
+          navigation={navigation}
+          isMyProfile={isMyProfile}
+        />
       )}
     />
   );

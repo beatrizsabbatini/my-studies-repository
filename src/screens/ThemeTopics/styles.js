@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
+  list: {
+    marginTop: metrics.doubleBaseMargin,
+  },
   background: {
     padding: metrics.doubleBaseMargin,
   },
@@ -40,9 +43,9 @@ const styles = StyleSheet.create({
     color: colors.TextGrey,
   },
   button: {
-    padding: metrics.smallMargin,
+    padding: metrics.baseMargin,
     width: '49%',
-    borderRadius: metrics.doubleBaseMargin,
+    borderRadius: metrics.smallMargin,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: metrics.doubleBaseMargin,
+    marginBottom: metrics.baseMargin,
   },
 });
 

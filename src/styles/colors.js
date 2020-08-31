@@ -8,4 +8,5 @@ export default {
   Red: '#E26969',
   Yellow: '#FFEE00',
   Green: '#6ED586',
+  InactivePurpleButton: '#E3D4F2',
 };

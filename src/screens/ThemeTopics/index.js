@@ -1,6 +1,7 @@
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import Button from '../../components/UI/Button';
 import { colors } from '../../styles';
 import styles from './styles';
 
@@ -28,7 +29,7 @@ const ThemeTopics = ({ navigation, route }) => {
     },
   ];
 
-  const { isSearchTheme, item } = route.params;
+  const { isSearchTheme, item, isMyProfile } = route.params;
 
   return (
     <View style={styles.background}>
@@ -40,6 +41,7 @@ const ThemeTopics = ({ navigation, route }) => {
                 userId: item.userId,
                 userName: item.createdBy,
                 userPhoto: item.picture,
+                isSearchTheme: isSearchTheme,
               })
             }
             style={[styles.button, { backgroundColor: colors.Purple }]}
@@ -60,6 +62,16 @@ const ThemeTopics = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
         </View>
+      )}
+      {isMyProfile && (
+        <Button
+          backgroundColor={colors.Purple}
+          buttonText="Novo tópico"
+          textColor={colors.White}
+          width="100%"
+        >
+          <MaterialIcons name="add" size={24} color={colors.White} />
+        </Button>
       )}
       <FlatList
         style={styles.list}
