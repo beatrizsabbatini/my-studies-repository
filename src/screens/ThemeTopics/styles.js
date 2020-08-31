@@ -43,8 +43,9 @@ const styles = StyleSheet.create({
     color: colors.TextGrey,
   },
   button: {
+    flexDirection: 'row',
+    backgroundColor: colors.Purple,
     padding: metrics.baseMargin,
-    width: '49%',
     borderRadius: metrics.smallMargin,
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,9 +60,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonText: {
-    fontSize: fonts.small,
+    fontSize: fonts.medium,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: colors.White,
+    marginLeft: metrics.baseMargin,
   },
   buttonsContainer: {
     flexDirection: 'row',

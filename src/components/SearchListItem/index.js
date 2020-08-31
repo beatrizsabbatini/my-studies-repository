@@ -8,7 +8,8 @@ const SearchListItem = ({
   item,
   lastItem,
   subtitleItems,
-  onPress,
+  onPressTheme,
+  onPressProfile,
   userName,
 }) => {
   function renderItems() {
@@ -21,42 +22,47 @@ const SearchListItem = ({
   }
 
   return (
-    <TouchableOpacity
-      style={[styles.itemContainer, lastItem && styles.lastItemContainer]}
-      onPress={onPress}
+    <View
+      style={[
+        styles.itemAndUserContainer,
+        lastItem && styles.lastItemContainer,
+      ]}
     >
-      <Avatar.Image
-        source={{ uri: item.picture }}
-        size={36}
-        style={{ margin: metrics.smallMargin }}
-      />
+      <TouchableOpacity style={[styles.itemContainer]} onPress={onPressTheme}>
+        <Avatar.Image
+          source={{ uri: item.picture }}
+          size={36}
+          style={{ margin: metrics.smallMargin }}
+        />
 
-      <View style={styles.info}>
-        <View style={styles.titleRow}>
-          <Text style={styles.title}>{item.name}</Text>
-          {userName && (
+        <View style={styles.info}>
+          <View style={styles.titleRow}>
+            <Text style={styles.title}>{item.name}</Text>
+          </View>
+          <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">
+            Temas salvos:
             <Text
-              style={styles.userName}
+              style={styles.subtitleItems}
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              Tema de {userName}
+              {' '}
+              {renderItems()}
             </Text>
-          )}
-        </View>
-        <Text style={styles.subtitle} numberOfLines={1} ellipsizeMode="tail">
-          Temas salvos:
-          <Text
-            style={styles.subtitleItems}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {' '}
-            {renderItems()}
           </Text>
-        </Text>
-      </View>
-    </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+      {userName && (
+        <TouchableOpacity style={styles.userContainer} onPress={onPressProfile}>
+          <Text style={styles.userName} numberOfLines={1} ellipsizeMode="tail">
+            Tema de {userName}
+          </Text>
+          <Text style={[styles.userName, { textDecorationLine: 'underline' }]}>
+            Ver Perfil
+          </Text>
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 

@@ -2,14 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.White,
-    borderRadius: metrics.smallMargin,
+  itemAndUserContainer: {
     marginVertical: metrics.smallMargin,
     marginHorizontal: 2,
-    padding: metrics.baseMargin,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -19,6 +14,14 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
 
     elevation: 2,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.White,
+    borderTopEndRadius: metrics.smallMargin,
+    borderTopStartRadius: metrics.smallMargin,
+    padding: metrics.baseMargin,
   },
   lastItemContainer: {
     marginBottom: 45,
@@ -47,8 +50,15 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: fonts.small,
     color: colors.Purple,
-    width: '50%',
-    textAlign: 'right',
+  },
+  userContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: colors.White,
+    padding: metrics.baseMargin,
+    borderTopColor: colors.LightGrey,
+    borderTopWidth: 1,
+    width: '100%',
   },
 });
 

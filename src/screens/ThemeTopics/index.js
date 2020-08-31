@@ -1,11 +1,11 @@
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
+import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import Button from '../../components/UI/Button';
 import { colors } from '../../styles';
 import styles from './styles';
 
 const ThemeTopics = ({ navigation, route }) => {
+  const [topButtonMessage, setTopButtonMessage] = useState('');
   const mockTopics = [
     {
       topicId: 1,
@@ -29,50 +29,28 @@ const ThemeTopics = ({ navigation, route }) => {
     },
   ];
 
-  const { isSearchTheme, item, isMyProfile } = route.params;
+  const { isMyProfile } = route.params;
+
+  useEffect(() => {
+    if (isMyProfile) {
+      setTopButtonMessage('Adicionar tópico');
+    } else {
+      setTopButtonMessage('Copiar tema para sua biblioteca');
+    }
+  }, [isMyProfile]);
 
   return (
     <View style={styles.background}>
-      {isSearchTheme && (
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('UserProfile', {
-                userId: item.userId,
-                userName: item.createdBy,
-                userPhoto: item.picture,
-                isSearchTheme: isSearchTheme,
-              })
-            }
-            style={[styles.button, { backgroundColor: colors.Purple }]}
-          >
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[styles.buttonText, { color: colors.White }]}
-            >
-              Outros temas de {item.creatorNickname}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.White }]}
-          >
-            <Text style={[styles.buttonText, { color: colors.Purple }]}>
-              Copiar tema para sua biblioteca
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      {isMyProfile && (
-        <Button
-          backgroundColor={colors.Purple}
-          buttonText="Novo tópico"
-          textColor={colors.White}
-          width="100%"
-        >
-          <MaterialIcons name="add" size={24} color={colors.White} />
-        </Button>
-      )}
+      <TouchableOpacity style={styles.button}>
+        {isMyProfile ? (
+          <Ionicons name="md-add" size={18} color={colors.White} />
+        ) : (
+          <MaterialIcons name="content-copy" size={18} color={colors.White} />
+        )}
+
+        <Text style={styles.buttonText}>{topButtonMessage}</Text>
+      </TouchableOpacity>
+
       <FlatList
         style={styles.list}
         data={mockTopics}

@@ -12,6 +12,7 @@ const ThemeItem = ({ item, navigation, isMyProfile }) => {
           picture: item.themePicture,
           name: item.themeName,
           isMyProfile: isMyProfile,
+          item: item,
         })
       }
     >

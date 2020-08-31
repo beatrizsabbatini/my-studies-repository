@@ -83,12 +83,12 @@ const UserSearch = ({ navigation }) => {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <SearchListItem
-              onPress={() =>
+              onPressTheme={() =>
                 navigation.navigate('UserProfile', {
                   userId: item.id,
                   userName: item.name,
                   userPhoto: item.picture,
-                  isSearchTheme: true,
+                  isMyProfile: false,
                 })
               }
               item={item}
