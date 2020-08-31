@@ -1,5 +1,4 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
@@ -26,14 +25,12 @@ const SearchNavigator = ({ navigation }) => {
           headerTitle: () => (
             <Image
               source={Logo}
-              style={{ resizeMode: 'contain', height: 45 }}
+              style={{ resizeMode: 'contain', width: 150 }}
             />
           ),
           headerTitleAlign: 'center',
-          headerLeft: (props) => (
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-            >
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
               <MaterialIcons
                 name="menu"
                 size={30}
@@ -47,7 +44,7 @@ const SearchNavigator = ({ navigation }) => {
       <Stack.Screen
         name="UserProfile"
         component={UserProfile}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: `${route.params.userName}`,
           headerLeft: () => (
             <Ionicons
@@ -69,7 +66,7 @@ const SearchNavigator = ({ navigation }) => {
       <Stack.Screen
         name="ThemeTopics"
         component={ThemeTopics}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: `${route.params.name}`,
           headerTitleAlign: 'center',
           headerLeft: () => (

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import Modal from '../../components/Modal';
 import ThemesList from '../../components/ThemesList';
+import Modal from '../../components/UI/Modal';
 import { AddThemeModalContext } from '../../contexts/AddThemeModalContext';
 import ModalContent from './components/ModalContent';
 
@@ -13,6 +13,7 @@ const MyLibrary = ({ navigation }) => {
         userId={1}
         userName="Beatriz Schwartz"
         navigation={navigation}
+        isMyProfile={true}
       />
       <Modal modalVisible={modalOpen}>
         <ModalContent modalVisible={modalOpen} setModalVisible={setModalOpen} />

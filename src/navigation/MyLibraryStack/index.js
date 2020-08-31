@@ -33,19 +33,21 @@ const MyLibraryNavigator = ({ navigation }) => {
             </TouchableOpacity>
           ),
           headerLeft: (props) => (
-            <MaterialIcons
-              name="menu"
-              size={30}
-              color={colors.Purple}
-              style={{ paddingLeft: metrics.doubleBaseMargin }}
-            />
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <MaterialIcons
+                name="menu"
+                size={30}
+                color={colors.Purple}
+                style={{ paddingLeft: metrics.doubleBaseMargin }}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
       <Stack.Screen
         name="ThemeTopics"
         component={ThemeTopics}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: `${route.params.name}`,
           headerTitleAlign: 'center',
           headerLeft: () => (

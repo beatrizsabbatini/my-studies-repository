@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import SearchBackgroundIcon from '../../../assets/icons/search-default-bg.svg';
-import BackgroundIconAndMessage from '../../components/BackgroundIconAndMessage';
 import SearchListItem from '../../components/SearchListItem';
+import BackgroundIconAndMessage from '../../components/UI/BackgroundIconAndMessage';
 import styles from './styles';
 
 const UserSearch = ({ navigation }) => {
@@ -88,6 +88,7 @@ const UserSearch = ({ navigation }) => {
                   userId: item.id,
                   userName: item.name,
                   userPhoto: item.picture,
+                  isSearchTheme: true,
                 })
               }
               item={item}
