@@ -61,6 +61,7 @@ const ThemesList = ({ userId, userName, navigation, isMyProfile }) => {
       keyExtractor={(item) => item.themeId.toString()}
       renderItem={({ item }) => (
         <ThemeItem
+          key={item.themeId.toString()}
           item={item}
           navigation={navigation}
           isMyProfile={isMyProfile}

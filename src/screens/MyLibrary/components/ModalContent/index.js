@@ -27,7 +27,7 @@ const ModalContent = ({ modalVisible, setModalVisible }) => {
       <Text style={styles.addPictureText}>Adicionar Capa</Text>
       <TextInput
         style={{ height: 30, width: '100%' }}
-        mode="outlined"
+        mode="flat"
         label="Título"
         value={text}
         onChangeText={(text) => setText(text)}

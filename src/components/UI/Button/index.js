@@ -10,6 +10,7 @@ const Button = ({
   width,
   disabled,
   borderColor,
+  padding,
 }) => {
   return (
     <TouchableOpacity
@@ -21,6 +22,7 @@ const Button = ({
           backgroundColor: backgroundColor,
           width: width,
           borderColor: borderColor || 'transparent',
+          padding: padding || 5,
         },
       ]}
     >

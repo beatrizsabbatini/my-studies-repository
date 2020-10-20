@@ -8,7 +8,7 @@ const AddThemeModalContext = createContext({
 const AddThemeModalProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const updateModalStatus = async (modalNewStatus) => {
+  const updateModalStatus = (modalNewStatus) => {
     setModalOpen(modalNewStatus);
   };
 

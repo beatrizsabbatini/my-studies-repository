@@ -1,6 +1,7 @@
+import firebase from 'firebase';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Text, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import * as Yup from 'yup';
 import Button from '../../../../components/UI/Button';
@@ -17,13 +18,33 @@ const LoginForm = ({ navigation }) => {
     password: Yup.string().required('Campo obrigatório!'),
   });
 
-  const handleSignIn = () => {
+  const handleSignIn = (values) => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigation.navigate('MainTabs');
-    }, 3000);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+        navigation.navigate('MainTabs');
+        setLoading(false);
+      })
+      .catch((error) => {
+        Alert.alert('Erro!', getMessageByErrorCode(error.code));
+        setLoading(false);
+      });
   };
+
+  function getMessageByErrorCode(code) {
+    switch (code) {
+      case 'auth/user-not-found':
+        return 'Usuário não encontrado! Crie uma conta para logar com esse e-mail.';
+
+      case 'auth/wrong-password':
+        return 'Senha incorreta! Tente novamente.';
+
+      default:
+        break;
+    }
+  }
 
   return (
     <Formik
@@ -32,26 +53,29 @@ const LoginForm = ({ navigation }) => {
         email: '',
         password: '',
       }}
-      onSubmit={(values) => handleSignIn()}
+      onSubmit={(values) => handleSignIn(values)}
     >
-      {({ values, handleChange, handleSubmit, errors, isValid }) => (
+      {({ values, handleChange, handleSubmit, errors }) => (
         <View style={styles.inputsContainer}>
           <TextInput
             style={styles.textInput}
-            mode="outlined"
+            disabled={loading}
+            mode="flat"
             label="E-mail"
             placeholderTextColor={colors.LightGrey}
             value={values.email}
             onChangeText={handleChange('email')}
+            keyboardType="email-address"
           />
           {errors.email && (
             <Text style={styles.errorMessage}>{errors.email}</Text>
           )}
           <TextInput
+            disabled={loading}
             secureTextEntry
             style={styles.textInput}
             placeholderTextColor={colors.LightGrey}
-            mode="outlined"
+            mode="flat"
             label="Senha"
             value={values.password}
             onChangeText={handleChange('password')}
@@ -72,7 +96,7 @@ const LoginForm = ({ navigation }) => {
             <Button
               disabled={loading ? true : false}
               onPress={() => {
-                handleSubmit();
+                handleSubmit(values);
               }}
               buttonText="Entrar"
               backgroundColor={
