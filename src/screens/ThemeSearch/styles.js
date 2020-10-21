@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   },
   background: {
     padding: metrics.bigMargin,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
   },
 });
 

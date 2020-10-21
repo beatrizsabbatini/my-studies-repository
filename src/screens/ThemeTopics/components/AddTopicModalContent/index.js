@@ -4,25 +4,11 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import { colors } from '../../../../styles';
-import styles from './styles';
+import styles from '../EditThemeModalContent/styles';
 
-const ModalContent = ({ modalVisible, setModalVisible }) => {
+const AddTopicModalContent = ({ modalVisible, setModalVisible }) => {
   const [text, setText] = useState('');
-
-  const saveTheme = async () => {
-
-    const { currentUser } = firebase.auth();
-
-     return await firebase
-      .database()
-      .ref(`/users/${currentUser.uid}/themes`)
-      .push({
-        title: text,
-        topics: [],
-      }).then(() => {
-        setModalVisible(!modalVisible)
-      })
-  }
+  const [content, setContent] = useState('');
 
   return (
     <>
@@ -33,14 +19,8 @@ const ModalContent = ({ modalVisible, setModalVisible }) => {
         style={styles.closeIcon}
         onPress={() => setModalVisible(!modalVisible)}
       />
-      <Text style={styles.modalTitle}>Adicionar Tema</Text>
-      <TouchableOpacity>
-        <Avatar.Image
-          source={require('../../../../../assets/add-photo.png')}
-          size={80}
-        />
-      </TouchableOpacity>
-      <Text style={styles.addPictureText}>Adicionar Capa</Text>
+      <Text style={styles.modalTitle}>ADICIONAR TÓPICO</Text>
+
       <Text >TÍTULO</Text>
       <TextInput
         style={{ height: 30, width: '100%', marginBottom: 20 }}
@@ -48,6 +28,16 @@ const ModalContent = ({ modalVisible, setModalVisible }) => {
         label=""
         value={text}
         onChangeText={(text) => setText(text)}
+        theme={{ colors: { primary: colors.Purple } }}
+      />
+      <Text >Conteúdo:</Text>
+      <TextInput
+        style={{ height: 30, width: '100%', marginBottom: 20 }}
+        mode="outlined"
+        label=""
+        numberOfLines={20}
+        value={content}
+        onChangeText={(text) => setContent(text)}
         theme={{ colors: { primary: colors.Purple } }}
       />
       <View style={styles.buttonsContainer}>
@@ -60,7 +50,7 @@ const ModalContent = ({ modalVisible, setModalVisible }) => {
         <TouchableOpacity
           disabled={text.length == 0}
           style={[styles.button, styles.save, text.length == 0 && {opacity: 0.3}]}
-          onPress={() => saveTheme()}
+          onPress={() => {}}
         >
           <Text style={{ color: colors.White }}>Salvar</Text>
         </TouchableOpacity>
@@ -69,4 +59,4 @@ const ModalContent = ({ modalVisible, setModalVisible }) => {
   );
 };
 
-export default ModalContent;
+export default AddTopicModalContent;

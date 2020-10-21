@@ -48,7 +48,7 @@ const MyLibraryNavigator = ({ navigation }) => {
         name="ThemeTopics"
         component={ThemeTopics}
         options={({ route, navigation }) => ({
-          headerTitle: `${route.params.name}`,
+          headerTitle: `${route.params.item.title}`,
           headerTitleAlign: 'center',
           headerLeft: () => (
             <Ionicons

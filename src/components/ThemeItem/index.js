@@ -16,15 +16,12 @@ const ThemeItem = ({ item, navigation, isMyProfile }) => {
         })
       }
     >
-      <Avatar.Image
-        source={{
-          uri: item.themePicture,
-        }}
-        size={30}
-        style={styles.themeImage}
-      />
+       <Avatar.Image
+          source={require('../../../assets/add-photo.png')}
+          size={40}
+        />
       <Text style={styles.themeName} numberOfLines={2} ellipsizeMode="tail">
-        {item.themeName}
+        {item.title}
       </Text>
     </TouchableOpacity>
   );

@@ -6,6 +6,7 @@ export const Types = {
 };
 //Initial state
 const initialState = {
+  formValues: {},
   loading: false,
   errors: undefined
 };
@@ -17,7 +18,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: true,
         errors: undefined,
-        userData: action.payload
+        formValues: action.payload
       };
     case Types.NEW_USER_SUCCESS:
       return {
@@ -40,10 +41,10 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-export function newUserRequest(userData) {
+export function newUserRequest(formValues) {
   return {
     type: Types.NEW_USER_REQUEST,
-    payload: userData
+    payload: formValues
   };
 }
 

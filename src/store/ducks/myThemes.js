@@ -6,7 +6,7 @@ export const Types = {
 };
 //Initial state
 const initialState = {
-  themes: [],
+  themes: undefined,
   loading: false,
   errors: undefined
 };

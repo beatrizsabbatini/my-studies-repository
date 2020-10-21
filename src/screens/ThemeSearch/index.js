@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import SearchListItem from '../../components/SearchListItem';
 import styles from './styles';
+import Message from '../../../assets/soon-functionality.png'
 
 const ThemeSearch = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,7 +37,8 @@ const ThemeSearch = ({ navigation }) => {
 
   return (
     <View style={styles.background}>
-      <Searchbar
+      <Image source={Message} />
+      {/* <Searchbar
         style={styles.searchBar}
         inputStyle={styles.input}
         placeholder="Search"
@@ -70,7 +72,7 @@ const ThemeSearch = ({ navigation }) => {
             lastItem={index === mockThemes.length - 1 ? true : false}
           />
         )}
-      />
+      /> */}
     </View>
   );
 };

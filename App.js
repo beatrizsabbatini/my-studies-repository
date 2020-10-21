@@ -10,6 +10,8 @@ import { colors, metrics } from './src/styles';
 import { firebaseConfig } from './firebase';
 import { setNavigator } from './src/services/navigationService';
 import store from './src/store';
+import { EditThemeModalProvider } from './src/contexts/EditThemeModalContext';
+import { AddTopicModalProvider } from './src/contexts/AddTopicModalContext';
 
 export default function App() {
 
@@ -30,15 +32,19 @@ export default function App() {
   return (
    
     <PaperProvider theme={theme}>
-      <AddThemeModalProvider>
-        <Provider store={store}>
-        <NavigationContainer ref={navigatorRef => {
-          		setNavigator(navigatorRef);
-        		}}>
-            <AppNavigator />
-          </NavigationContainer>
-        </Provider>
-      </AddThemeModalProvider>
+      <AddTopicModalProvider>
+        <AddThemeModalProvider>
+          <EditThemeModalProvider>
+            <Provider store={store}>
+              <NavigationContainer ref={navigatorRef => {
+                  setNavigator(navigatorRef);
+                }}>
+                <AppNavigator />
+              </NavigationContainer>
+            </Provider>
+          </EditThemeModalProvider>
+        </AddThemeModalProvider>
+      </AddTopicModalProvider>
     </PaperProvider>
   );
 }

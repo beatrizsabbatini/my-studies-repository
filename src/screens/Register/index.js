@@ -12,6 +12,8 @@ const Register = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const registerFormSchema = Yup.object().shape({
+    name: Yup.string()
+    .required('Campo obrigatório!'),
     email: Yup.string()
       .required('Campo obrigatório!')
       .email('Digite um email válido!')
@@ -77,6 +79,7 @@ const Register = ({ navigation }) => {
       <Formik
         validationSchema={registerFormSchema}
         initialValues={{
+          name: '',
           email: '',
           password: '',
           confirmPassword: '',
@@ -86,6 +89,18 @@ const Register = ({ navigation }) => {
         {({ values, handleChange, handleSubmit, errors }) => (
           <>
             <View>
+            <TextInput
+                disabled={loading}
+                style={styles.textInput}
+                placeholderTextColor={colors.LightGrey}
+                mode="flat"
+                label="Digite seu nome"
+                value={values.name}
+                onChangeText={handleChange('name')}
+              />
+              {errors.name && (
+                <Text style={styles.errorMessage}>{errors.name}</Text>
+              )}
               <TextInput
                 disabled={loading}
                 style={styles.textInput}
