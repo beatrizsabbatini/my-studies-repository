@@ -4,13 +4,10 @@
   },
 
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    // "prettier",
-    // "prettier/react",
-    // "prettier/legacy",
-    // "prettier/react-legacy"
+    "prettier",
+    "prettier/react"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -20,12 +17,12 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    "prettier/prettier": "error",
     "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".js", ".jsx"],
-        "sort-imports": "error"
-      }
-    ]
+      "warn",
+      {"extensions": [".js", ".jsx"]}
+    ],
+    "import/prefer-default-export": "off",
+    "jsx-quotes": ["error", "prefer-single"]
   }
 }

@@ -7,9 +7,12 @@ import * as Yup from 'yup';
 import Button from '../../../../components/UI/Button';
 import { colors } from '../../../../styles';
 import styles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest, loginSuccess, loginErrors } from '../../../../store/ducks/login';
 
 const LoginForm = ({ navigation }) => {
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.login.loading);
 
   const loginFormSchema = Yup.object().shape({
     email: Yup.string()
@@ -18,29 +21,32 @@ const LoginForm = ({ navigation }) => {
     password: Yup.string().required('Campo obrigatório!'),
   });
 
-  const handleSignIn = (values) => {
-    setLoading(true);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(values.email, values.password)
-      .then(() => {
-        navigation.navigate('MainTabs');
-        setLoading(false);
-      })
-      .catch((error) => {
-        Alert.alert('Erro!', getMessageByErrorCode(error.code));
-        setLoading(false);
-      });
-  };
+  const loginService = async (values) => {
 
+      dispatch(loginRequest());
+
+      return await firebase
+        .auth()
+        .signInWithEmailAndPassword(values.email, values.password)
+        .then(() => {
+          dispatch(loginSuccess())
+          navigation.navigate('MainTabs');
+        })
+        .catch((error) => {
+          dispatch(loginErrors(error))
+          Alert.alert('Erro!', getMessageByErrorCode(error.code));
+        });
+      
+    }
+  
   function getMessageByErrorCode(code) {
     switch (code) {
       case 'auth/user-not-found':
         return 'Usuário não encontrado! Crie uma conta para logar com esse e-mail.';
-
+  
       case 'auth/wrong-password':
         return 'Senha incorreta! Tente novamente.';
-
+  
       default:
         break;
     }
@@ -53,7 +59,7 @@ const LoginForm = ({ navigation }) => {
         email: '',
         password: '',
       }}
-      onSubmit={(values) => handleSignIn(values)}
+      onSubmit={(values) => loginService(values)}
     >
       {({ values, handleChange, handleSubmit, errors }) => (
         <View style={styles.inputsContainer}>
