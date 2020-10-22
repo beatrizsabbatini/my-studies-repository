@@ -1,8 +1,8 @@
 // Action Types
 export const Types = {
-  GET_THEMES_REQUEST: "myThemes/get themes request",
-  GET_THEMES_SUCCESS: "myThemes/get themes success",
-  GET_THEMES_ERRORS: "myThemes/get themes errors",
+  GET_MY_THEMES_REQUEST: "myThemes/get themes request",
+  GET_MY_THEMES_SUCCESS: "myThemes/get themes success",
+  GET_MY_THEMES_ERRORS: "myThemes/get themes errors",
 };
 //Initial state
 const initialState = {
@@ -13,13 +13,13 @@ const initialState = {
 //Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case Types.GET_THEMES_REQUEST:
+    case Types.GET_MY_THEMES_REQUEST:
       return {
         ...state,
         loading: true,
         errors: undefined,
       };
-    case Types.GET_THEMES_SUCCESS:
+    case Types.GET_MY_THEMES_SUCCESS:
       return {
         ...state,
         errors: undefined,
@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
         themes: action.payload
       };
 
-    case Types.GET_THEMES_ERRORS:
+    case Types.GET_MY_THEMES_ERRORS:
       return {
         ...state,
         loading: false,
@@ -43,20 +43,20 @@ export default function reducer(state = initialState, action) {
 // Action Creators
 export function getThemesRequest() {
   return {
-    type: Types.GET_THEMES_REQUEST,
+    type: Types.GET_MY_THEMES_REQUEST,
   };
 }
 
 export function getThemesSuccess(themes) {
   return {
-    type: Types.GET_THEMES_SUCCESS,
+    type: Types.GET_MY_THEMES_SUCCESS,
     payload: themes
   };
 }
 
 export function getThemesErrors(errors) {
   return {
-    type: Types.GET_THEMES_ERRORS,
+    type: Types.GET_MY_THEMES_ERRORS,
     payload: errors
   };
 }

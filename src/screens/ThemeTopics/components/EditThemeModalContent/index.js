@@ -10,9 +10,9 @@ import styles from './styles';
 const EditThemeModalContent = ({ modalVisible, setModalVisible, item }) => {
   const [text, setText] = useState('');
   const navigation = useNavigation();
+  const { currentUser } = firebase.auth();
 
   const updateThemeService = async () => {
-    const { currentUser } = firebase.auth();
 
     return await firebase
       .database()
@@ -24,6 +24,24 @@ const EditThemeModalContent = ({ modalVisible, setModalVisible, item }) => {
         navigation.goBack();
         Alert.alert('Sucesso!', 'Tema alterado com sucesso.')
       }) 
+  }
+
+  const deleteThemeService = async () => {
+
+    try {
+      await firebase
+        .database()
+        .ref(`/users/${currentUser.uid}/themes/${item.id}`)
+        .remove()
+        .then(() => {
+          setModalVisible(false);
+          navigation.goBack();
+          Alert.alert('Sucesso!', 'Tema deletado com sucesso.')
+        }) 
+    } catch(err){
+          console.log(err);
+          Alert.alert('Erro!', 'Não foi possível deletar, verifique sua conexão à internet.')
+    }
   }
 
   return (
@@ -70,7 +88,7 @@ const EditThemeModalContent = ({ modalVisible, setModalVisible, item }) => {
       </View>
       <TouchableOpacity
           style={styles.deleteButton}
-          onPress={() => {}}
+          onPress={() => deleteThemeService()}
         >
           <Text style={[styles.deleteText]}>Deletar Tema</Text>
         </TouchableOpacity>

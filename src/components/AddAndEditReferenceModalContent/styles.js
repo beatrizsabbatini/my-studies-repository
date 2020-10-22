@@ -1,18 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, metrics } from '../../../../styles';
+import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
   closeIcon: {
     position: 'absolute',
     right: 20,
     top: 10,
-  },
-  addPictureText: {
-    fontSize: fonts.small,
-    color: colors.Purple,
-    textDecorationLine: 'underline',
-    padding: metrics.baseMargin,
-    marginBottom: metrics.doubleBaseMargin,
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -41,9 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.White,
     color: colors.Purple,
   },
-  deleteText:{
-    color: colors.White
-  },
   save: {
     color: colors.White,
     backgroundColor: colors.Purple,
@@ -53,11 +43,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: metrics.baseMargin,
   },
-  colorsContainer:{
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
 });
 
 export default styles;

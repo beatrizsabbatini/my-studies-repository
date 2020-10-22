@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, metrics } from '../../../../styles';
+import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
   closeIcon: {
@@ -37,12 +37,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
+  deleteText:{
+    color: colors.White,
+    fontWeight: 'bold'
+  },
   cancel: {
     backgroundColor: colors.White,
     color: colors.Purple,
-  },
-  deleteText:{
-    color: colors.White
   },
   save: {
     color: colors.White,
