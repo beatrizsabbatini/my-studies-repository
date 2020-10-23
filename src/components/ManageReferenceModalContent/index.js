@@ -4,9 +4,13 @@ import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';
 import { TextInput } from 'react-native-paper';
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
 
 import { colors } from '../../styles';
 import styles from './styles';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 const ManageReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topicId, isEdit, reference }) => {
   const [title, setTitle] = useState('');

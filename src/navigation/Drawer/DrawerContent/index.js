@@ -1,6 +1,7 @@
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React from 'react';
+import firebase from 'firebase';
 import { Text, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
@@ -13,6 +14,7 @@ import { getMyTopicsSuccess } from '../../../store/ducks/myTopics';
 
 const DrawerContent = ({ navigation }) => {
   const dispatch = useDispatch();
+  var user = firebase.auth().currentUser;
 
   const resetReduxStates = () => {
     dispatch(getMyReferencesSuccess(undefined));
@@ -24,18 +26,14 @@ const DrawerContent = ({ navigation }) => {
     <View style={styles.drawerBackground}>
       <DrawerContentScrollView>
         <View style={styles.userInfo}>
-          <Avatar.Image
-            size={70}
-            source={{ uri: `https://api.adorable.io/avatars/${Math.random()}` }}
-          />
-          <Text style={styles.userName}>Beatriz Schwartz</Text>
-          <Button
+          <Text style={styles.userName}>{user && user.displayName}</Text>
+          {/* <Button
             buttonText="Editar perfil"
             width="90%"
             backgroundColor={colors.White}
             textColor={colors.Purple}
             borderColor={colors.Purple}
-          />
+          /> */}
         </View>
       </DrawerContentScrollView>
 

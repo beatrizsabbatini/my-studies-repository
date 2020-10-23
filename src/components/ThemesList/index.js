@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import firebase from 'firebase';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 import ThemeItem from '../ThemeItem';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { getThemesRequest, getThemesSuccess} from '../../store/ducks/myThemes';
 import { colors } from '../../styles';
+import EmptyList from '../../../assets/study.png'
 
 const ThemesList = ({ userId, userName, navigation, isMyProfile }) => {
   const dispatch = useDispatch()
@@ -53,19 +54,29 @@ const ThemesList = ({ userId, userName, navigation, isMyProfile }) => {
     {loading ? (
       <ActivityIndicator size="large" style={{flex: 1, alignSelf: 'center'}} color={colors.Purple} />
     ) : (
-        <FlatList
-        style={styles.list}
-        data={themesWithId}
-        numColumns={numberOfColumns}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ThemeItem
-            item={item}
-            navigation={navigation}
-            isMyProfile={isMyProfile}
-          />
+      <>
+        {themesWithId ? (
+          <FlatList
+          style={styles.list}
+          data={themesWithId}
+          numColumns={numberOfColumns}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <ThemeItem
+              item={item}
+              navigation={navigation}
+              isMyProfile={isMyProfile}
+            />
+          )}
+        />
+        ) : (
+          <View style={styles.noThemesContainer}>
+            <Image source={EmptyList} />
+            <Text style={styles.noThemesMessage}>Ainda não possui temas</Text>
+          </View>
         )}
-      />
+        
+      </>
     )}
     </>
   );

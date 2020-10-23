@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { FlatList, View } from 'react-native';
+import firebase from 'firebase'
 import { Searchbar } from 'react-native-paper';
+
 import SearchBackgroundIcon from '../../../assets/icons/search-default-bg.svg';
 import SearchListItem from '../../components/SearchListItem';
 import BackgroundIconAndMessage from '../../components/UI/BackgroundIconAndMessage';
@@ -8,63 +11,34 @@ import styles from './styles';
 
 const UserSearch = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [users, setUsers] = useState();
 
-  const mockUsers = [
-    {
-      id: 1,
-      name: 'Luis Guilherme Farias',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Python', 'JavaScript', 'React JS'],
-    },
-    {
-      id: 2,
-      name: 'Beatriz Schwartz',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['React Native', 'JavaScript', 'React JS'],
-    },
-    {
-      id: 3,
-      name: 'Juliana Yukari',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 4,
-      name: 'Gilberto Falco',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 5,
-      name: 'Pedro Vinchi',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 6,
-      name: 'Lucas Carvalho',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 7,
-      name: 'Gabriela Soares',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 8,
-      name: 'Matheus Oliveira Pereira',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-    {
-      id: 9,
-      name: 'Beatriz Forcato Lima',
-      picture: `https://api.adorable.io/avatars/${Math.random()}`,
-      themes: ['Java', 'JavaScript', 'React'],
-    },
-  ];
+  const mockUsers = []
+
+  useEffect(() => {
+    getUsers();
+  }, [])
+
+  useEffect(() => {
+    if (users) console.log(users)
+  }, [users])
+
+  const getUsers = async () => {
+
+    try{
+  
+    return await firebase
+      .database()
+      .ref(`users`)
+      .on('value', snapshot => {
+         const users = snapshot.val();
+         console.log('snapshot users:', users)
+         setUsers(users);
+      })
+    } catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <View style={styles.background}>
@@ -98,7 +72,7 @@ const UserSearch = ({ navigation }) => {
           )}
         />
       ) : (
-        <BackgroundIconAndMessage message="Digite algo na barra de pesquisa">
+        <BackgroundIconAndMessage message="Digite o nome de algum usuário">
           <SearchBackgroundIcon style={styles.backgroundIcon} />
         </BackgroundIconAndMessage>
       )}

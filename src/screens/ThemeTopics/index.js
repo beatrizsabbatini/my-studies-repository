@@ -9,10 +9,10 @@ import { FlatList, Text, TouchableOpacity, View, ActivityIndicator } from 'react
 import { colors, metrics } from '../../styles';
 import styles from './styles';
 import Modal from '../../components/UI/Modal';
-import EditThemeModalContent from './components/EditThemeModalContent';
 import { EditThemeModalContext } from '../../contexts/EditThemeModalContext';
 import ManageTopicModalContent from '../../components/ManageTopicModalContent';
 import { getMyTopicsRequest, getMyTopicsSuccess } from '../../store/ducks/myTopics';
+import ManageThemeModalContent from '../../components/ManageThemeModalContent';
 
 const ThemeTopics = ({ route }) => {
   //const [topButtonMessage, setTopButtonMessage] = useState('');
@@ -160,7 +160,7 @@ const ThemeTopics = ({ route }) => {
         
       </View>
       <Modal modalVisible={editThemeModalOpen}>
-        <EditThemeModalContent item={item} modalVisible={editThemeModalOpen} setModalVisible={setEditThemeModalOpen} />
+        <ManageThemeModalContent isEdit theme={theme} modalVisible={editThemeModalOpen} setModalVisible={setEditThemeModalOpen} />
       </Modal>
       <Modal modalVisible={manageTopicModalOpen}>
         <ManageTopicModalContent topic={topic} isEditModal={isEditModal} themeId={item.id} modalVisible={manageTopicModalOpen} setModalVisible={setManageTopicModalOpen} />

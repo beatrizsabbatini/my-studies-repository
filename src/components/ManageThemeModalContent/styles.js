@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts, metrics } from '../../../../styles';
+import { colors, fonts, metrics } from '../../styles';
 
 const styles = StyleSheet.create({
   closeIcon: {
@@ -29,20 +29,9 @@ const styles = StyleSheet.create({
     width: '48%',
     alignItems: 'center',
   },
-  deleteButton:{
-    marginTop: 15,
-    padding: metrics.baseMargin,
-    borderRadius: metrics.smallMargin,
-    backgroundColor: colors.Red,
-    width: '100%',
-    alignItems: 'center',
-  },
   cancel: {
     backgroundColor: colors.White,
     color: colors.Purple,
-  },
-  deleteText:{
-    color: colors.White
   },
   save: {
     color: colors.White,
@@ -53,11 +42,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: metrics.baseMargin,
   },
-  colorsContainer:{
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
+  deleteButton:{
+    marginTop: 15,
+    padding: metrics.baseMargin,
+    borderRadius: metrics.smallMargin,
+    backgroundColor: colors.Red,
+    width: '100%',
+    alignItems: 'center',
+  },
+  deleteText:{
+    color: colors.White
+  },
 });
 
 export default styles;

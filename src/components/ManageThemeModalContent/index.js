@@ -7,17 +7,18 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';;
-
-import { colors } from '../../../../styles';
-import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { CurrentPictureContext } from '../../../../contexts/CurrentPictureContext';
 
-const ModalContent = ({ modalVisible, setModalVisible, photo }) => {
+import { colors } from '../../styles';
+import styles from './styles';
+import { CurrentPictureContext } from '../../contexts/CurrentPictureContext';
+
+const ManageThemeModalContent = ({ modalVisible, setModalVisible, isEdit, theme }) => {
   const [text, setText] = useState('');
   const [image, setImage] = useState();
 
   const { picture } = useContext(CurrentPictureContext);
+  const { currentUser } = firebase.auth();
 
 
   useEffect(() => {
@@ -63,18 +64,50 @@ const ModalContent = ({ modalVisible, setModalVisible, photo }) => {
 
   const saveTheme = async () => {
 
-    const { currentUser } = firebase.auth();
-
      return await firebase
       .database()
       .ref(`/users/${currentUser.uid}/themes`)
       .push({
         title: text,
-        image: image || '',
+        image: image || null,
         topics: [],
       }).then(() => {
         setModalVisible(!modalVisible)
+        Alert.alert('Sucesso!', 'Tema cadastrado.')
       })
+  }
+
+  const updateThemeService = async () => {
+
+    return await firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/themes/${theme.id}`)
+      .set({
+        title: text,
+        image: image || null,
+      }).then(() => {
+        setModalVisible(false);
+        navigation.goBack();
+        Alert.alert('Sucesso!', 'Tema alterado com sucesso.')
+      }) 
+  }
+
+  const deleteThemeService = async () => {
+
+    try {
+      await firebase
+        .database()
+        .ref(`/users/${currentUser.uid}/themes/${theme.id}`)
+        .remove()
+        .then(() => {
+          setModalVisible(false);
+          navigation.goBack();
+          Alert.alert('Sucesso!', 'Tema deletado com sucesso.')
+        }) 
+    } catch(err){
+          console.log(err);
+          Alert.alert('Erro!', 'Não foi possível deletar, verifique sua conexão à internet.')
+    }
   }
 
   const handleAddPicture = () => {
@@ -101,7 +134,7 @@ const ModalContent = ({ modalVisible, setModalVisible, photo }) => {
         style={styles.closeIcon}
         onPress={() => setModalVisible(!modalVisible)}
       />
-      <Text style={styles.modalTitle}>Adicionar Tema</Text>
+      <Text style={styles.modalTitle}>{isEdit ? 'Editar' : 'Adicionar'} Tema</Text>
       <TouchableOpacity onPress={() => {
         handleAddPicture();
         }}>
@@ -111,7 +144,7 @@ const ModalContent = ({ modalVisible, setModalVisible, photo }) => {
             size={80}
           /> ) : (
             <Avatar.Image
-            source={require('../../../../../assets/add-photo.png')}
+            source={require('../../../assets/add-photo.png')}
             size={80}
             />
         )}
@@ -136,13 +169,27 @@ const ModalContent = ({ modalVisible, setModalVisible, photo }) => {
         <TouchableOpacity
           disabled={text.length == 0}
           style={[styles.button, styles.save, text.length == 0 && {opacity: 0.3}]}
-          onPress={() => saveTheme()}
+          onPress={() => {
+            if (isEdit){
+              updateThemeService()
+            }else{
+              saveTheme()
+            }
+          }}
         >
           <Text style={{ color: colors.White }}>Salvar</Text>
         </TouchableOpacity>
       </View>
+      {isEdit && (
+         <TouchableOpacity
+         style={styles.deleteButton}
+         onPress={() => deleteThemeService()}
+       >
+         <Text style={[styles.deleteText]}>Deletar Tema</Text>
+       </TouchableOpacity>
+      )}
     </>
   );
 };
 
-export default ModalContent;
+export default ManageThemeModalContent;
