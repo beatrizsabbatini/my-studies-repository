@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ThemesList from '../../components/ThemesList';
 import Modal from '../../components/UI/Modal';
 import { AddThemeModalContext } from '../../contexts/AddThemeModalContext';
 import ModalContent from './components/ModalContent';
 
-const MyLibrary = ({ navigation }) => {
+const MyLibrary = ({ navigation, route }) => {
   const { modalOpen, setModalOpen } = useContext(AddThemeModalContext);
 
   return (

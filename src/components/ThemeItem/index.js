@@ -9,17 +9,24 @@ const ThemeItem = ({ item, navigation, isMyProfile }) => {
       style={styles.themeContainer}
       onPress={() =>
         navigation.navigate('ThemeTopics', {
-          picture: item.themePicture,
+          image: item.image,
           name: item.themeName,
           isMyProfile: isMyProfile,
           item: item,
         })
       }
     >
-       <Avatar.Image
+      {item.image ? (
+        <Avatar.Image
+        source={{uri: item.image}}
+        size={40}
+      />
+      ) : (
+        <Avatar.Image
           source={require('../../../assets/add-photo.png')}
           size={40}
         />
+      )}
       <Text style={styles.themeName} numberOfLines={2} ellipsizeMode="tail">
         {item.title}
       </Text>

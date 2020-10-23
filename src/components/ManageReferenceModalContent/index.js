@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,11 +8,18 @@ import { TextInput } from 'react-native-paper';
 import { colors } from '../../styles';
 import styles from './styles';
 
-const AddReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topicId, isEdit, reference }) => {
+const ManageReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topicId, isEdit, reference }) => {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
 
   const { currentUser } = firebase.auth();
+
+  useEffect(() => {
+    if (reference){
+      setTitle(reference.title);
+      setLink(reference.url)
+    }
+  }, [])
 
   const createReferenceService = async () => {
 
@@ -82,9 +89,15 @@ const AddReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topi
           <Text style={[styles.cancel]}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={title.length == 0 || link.length == 0}
-          style={[styles.button, styles.save,title.length == 0 || link.length == 0 && {opacity: 0.3}]}
-          onPress={() => createReferenceService()}
+          disabled={title == '' || link == ''}
+          style={[styles.button, styles.save, title == '' || link == '' && {opacity: 0.3}]}
+          onPress={() => {
+            if (isEdit) {
+              updateReferenceService()
+            }else{
+            createReferenceService()
+            }
+          }}
         >
           <Text style={{ color: colors.White }}>Salvar</Text>
         </TouchableOpacity>
@@ -93,4 +106,4 @@ const AddReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topi
   );
 };
 
-export default AddReferenceModalContent;
+export default ManageReferenceModalContent;

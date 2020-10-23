@@ -1,10 +1,11 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons'; 
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useContext } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
+import CameraComponent from '../../components/Camera';
+import ImageViewer from '../../components/Image';
 import { AddThemeModalContext } from '../../contexts/AddThemeModalContext';
-import { EditTopicModalContext } from '../../contexts/EditTopicModalContext';
+import { CurrentPictureContext } from '../../contexts/CurrentPictureContext';
 import MyLibrary from '../../screens/MyLibrary';
 import ThemeTopics from '../../screens/ThemeTopics';
 import VisualizeTopic from '../../screens/VisualizeTopic';
@@ -15,7 +16,7 @@ const Stack = createStackNavigator();
 
 const MyLibraryNavigator = ({ navigation }) => {
   const { setModalOpen, modalOpen } = useContext(AddThemeModalContext);
-  const { editTopicModalOpen, setEditTopicModalOpen } = useContext(EditTopicModalContext);
+  const { setCurrentPicture } = useContext(CurrentPictureContext);
 
   return (
     <Stack.Navigator>
@@ -27,7 +28,10 @@ const MyLibraryNavigator = ({ navigation }) => {
           headerTitle: 'Meus Temas',
           headerTitleAlign: 'center',
           headerRight: () => (
-            <TouchableOpacity onPress={() => setModalOpen(!modalOpen)}>
+            <TouchableOpacity onPress={() => {
+              setCurrentPicture(null);
+              setModalOpen(!modalOpen)
+              }}>
               <MaterialIcons
                 name="add-to-photos"
                 size={28}
@@ -65,7 +69,7 @@ const MyLibraryNavigator = ({ navigation }) => {
           ),
           headerRight: () => (
             <Image
-              source={{ uri: route.params.picture }}
+              source={{ uri: route.params.image }}
               style={styles.picture}
             />
           ),
@@ -86,15 +90,20 @@ const MyLibraryNavigator = ({ navigation }) => {
               style={styles.backIcon}
             />
           ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => setEditTopicModalOpen(true)}>
-              <Feather 
-                name="edit" 
-                size={24} 
-                color={colors.Purple} 
-                style={{ paddingRight: metrics.doubleBaseMargin }} />
-            </TouchableOpacity>
-          ),
+        })}
+      />
+       <Stack.Screen
+        name="Camera"
+        component={CameraComponent}
+        options={() => ({
+          headerShown: false,
+        })}
+      /> 
+      <Stack.Screen
+        name="ImageViewer"
+        component={ImageViewer}
+        options={() => ({
+          headerShown: false,
         })}
       />
     </Stack.Navigator>

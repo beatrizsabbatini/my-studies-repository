@@ -1,22 +1,23 @@
-import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
-import firebase from 'firebase';
 import React, { useEffect, useState, useContext } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Ionicons, Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import firebase from 'firebase';
 import { FlatList, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
-import { colors } from '../../styles';
+
+import { colors, metrics } from '../../styles';
 import styles from './styles';
 import Modal from '../../components/UI/Modal';
 import EditThemeModalContent from './components/EditThemeModalContent';
 import { EditThemeModalContext } from '../../contexts/EditThemeModalContext';
-import AddAndEditTopicModalContent from '../../components/AddAndEditTopicModalContent';
-import { AddTopicModalContext } from '../../contexts/AddTopicModalContext';
-import { useDispatch, useSelector } from 'react-redux';
+import ManageTopicModalContent from '../../components/ManageTopicModalContent';
 import { getMyTopicsRequest, getMyTopicsSuccess } from '../../store/ducks/myTopics';
-import { useNavigation } from '@react-navigation/native';
 
 const ThemeTopics = ({ route }) => {
   //const [topButtonMessage, setTopButtonMessage] = useState('');
   const { editThemeModalOpen, setEditThemeModalOpen } = useContext(EditThemeModalContext);
-  const { addTopicModalOpen, setAddTopicModalOpen } = useContext(AddTopicModalContext);
+
   const { isMyProfile } = route.params;
   const { item } = route.params;
   const theme = item;
@@ -28,6 +29,9 @@ const ThemeTopics = ({ route }) => {
 
   const [keys, setKeys] = useState();
   const [topicsWithId, setTopicsWithId] = useState();
+  const [isEditModal, setIsEditModal] = useState();
+  const [manageTopicModalOpen, setManageTopicModalOpen] = useState(false);
+  const [topic, setTopic] = useState();
 
   useEffect(() => {
     getTopicsService()
@@ -108,7 +112,11 @@ const ThemeTopics = ({ route }) => {
                 <Text style={styles.buttonEditText}>EDITAR TEMA</Text>
               </TouchableOpacity>
               {isMyProfile && (
-                <TouchableOpacity style={styles.button} onPress={() => setAddTopicModalOpen(!addTopicModalOpen)}>
+                <TouchableOpacity style={styles.button} onPress={() => {
+                  setTopic({});
+                  setIsEditModal(false);
+                  setManageTopicModalOpen(true);
+                }}>
                 <Ionicons name="md-add" size={18} color={colors.White} />
                 <Text style={styles.buttonText}>Adicionar tópico</Text>
               </TouchableOpacity>
@@ -134,7 +142,17 @@ const ThemeTopics = ({ route }) => {
                     <View style={[styles.circle, { backgroundColor: getBackgroundColor(item.color) }]} />
                     <Text style={styles.topicName}>{item.title}</Text>
                   </View>
-                  <FontAwesome5 name="eye" size={15} color={colors.TextGrey} />
+                  <TouchableOpacity onPress={() => {
+                    setTopic(item);
+                    setIsEditModal(true);
+                    setManageTopicModalOpen(true);
+                    }}>
+                    <Feather 
+                      name="edit" 
+                      size={20} 
+                      color={colors.Purple} 
+                      style={{ paddingRight: metrics.doubleBaseMargin }} />
+                  </TouchableOpacity>
                 </TouchableOpacity>
               )}
             />
@@ -144,8 +162,8 @@ const ThemeTopics = ({ route }) => {
       <Modal modalVisible={editThemeModalOpen}>
         <EditThemeModalContent item={item} modalVisible={editThemeModalOpen} setModalVisible={setEditThemeModalOpen} />
       </Modal>
-      <Modal modalVisible={addTopicModalOpen}>
-        <AddAndEditTopicModalContent themeId={item.id} modalVisible={addTopicModalOpen} setModalVisible={setAddTopicModalOpen} />
+      <Modal modalVisible={manageTopicModalOpen}>
+        <ManageTopicModalContent topic={topic} isEditModal={isEditModal} themeId={item.id} modalVisible={manageTopicModalOpen} setModalVisible={setManageTopicModalOpen} />
       </Modal>
     </>
   );

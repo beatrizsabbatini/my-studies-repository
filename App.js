@@ -11,8 +11,7 @@ import { firebaseConfig } from './firebase';
 import { setNavigator } from './src/services/navigationService';
 import store from './src/store';
 import { EditThemeModalProvider } from './src/contexts/EditThemeModalContext';
-import { AddTopicModalProvider } from './src/contexts/AddTopicModalContext';
-import { EditTopicModalProvider } from './src/contexts/EditTopicModalContext';
+import { CurrentPictureProvider } from './src/contexts/CurrentPictureContext';
 
 export default function App() {
 
@@ -33,21 +32,19 @@ export default function App() {
   return (
    
     <PaperProvider theme={theme}>
-      <EditTopicModalProvider>
-        <AddTopicModalProvider>
-          <AddThemeModalProvider>
-            <EditThemeModalProvider>
-              <Provider store={store}>
-                <NavigationContainer ref={navigatorRef => {
-                    setNavigator(navigatorRef);
-                  }}>
-                  <AppNavigator />
-                </NavigationContainer>
-              </Provider>
-            </EditThemeModalProvider>
-          </AddThemeModalProvider>
-        </AddTopicModalProvider>
-      </EditTopicModalProvider>
+      <CurrentPictureProvider>
+        <AddThemeModalProvider>
+          <EditThemeModalProvider>
+            <Provider store={store}>
+              <NavigationContainer ref={navigatorRef => {
+                setNavigator(navigatorRef);
+                }}>
+                <AppNavigator />
+              </NavigationContainer>
+            </Provider>
+          </EditThemeModalProvider>
+        </AddThemeModalProvider>
+      </CurrentPictureProvider>
     </PaperProvider>
   );
 }

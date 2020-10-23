@@ -61,7 +61,6 @@ const Register = ({ navigation }) => {
   };
 
   function getMessageByErrorCode(code) {
-    console.log(code);
     switch (code) {
       case 'auth/email-already-in-use':
         return 'Já existe um usuário com esse e-mail cadastrado! Crie uma conta com outro e-mail.';

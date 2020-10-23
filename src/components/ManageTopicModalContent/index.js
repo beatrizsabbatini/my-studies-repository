@@ -1,15 +1,17 @@
+import React, { useEffect, useState } from 'react';
+
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import firebase from 'firebase';
-import React, { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
+
 import { colors } from '../../styles';
 import ColorBox from '../ColorBox';
 import styles from './styles';
 
-const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, isEditModal, topic }) => {
+const ManageTopicModalContent = ({ modalVisible, setModalVisible, themeId, isEditModal, topic }) => {
   const [text, setText] = useState('');
   const [redSelected, setRedSelected] = useState(true);
   const [greenSelected, setGreenSelected] = useState(false);
@@ -21,6 +23,12 @@ const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, i
   const navigation = useNavigation();
 
   const { currentUser } = firebase.auth();
+
+  useEffect(() => {
+    if (topic){
+      setText(topic.title);
+    }
+  }, [])
 
   const createTopicService = async () => {
    
@@ -36,17 +44,16 @@ const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, i
   }
 
   const editTopicService = async () => {
-   
+
     return await firebase
      .database()
      .ref(`/users/${currentUser.uid}/themes/${themeId}/topics/${topic.id}`)
      .set({
        title: text,
        color: colorChosen,
-       references: myReferences
+       references: myReferences || []
      }).then(() => {
        setModalVisible(false);
-       navigation.goBack();
        Alert.alert('Tópico atualizado com sucesso!')
      })
  }
@@ -93,7 +100,7 @@ const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, i
         style={{ height: 30, width: '100%', marginBottom: 20 }}
         mode="outlined"
         label=""
-        placeholder={topic.title || ''}
+        placeholder={topic ? topic.title : ''}
         value={text}
         onChangeText={(text) => setText(text)}
         theme={{ colors: { primary: colors.Purple } }}
@@ -138,8 +145,8 @@ const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, i
           <Text style={[styles.cancel]}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={text.length == 0}
-          style={[styles.button, styles.save, text.length == 0 && {opacity: 0.3}]}
+          disabled={text == ''}
+          style={[styles.button, styles.save, text == '' && {opacity: 0.3}]}
           onPress={() => {
             if (isEditModal){
               editTopicService()
@@ -163,5 +170,5 @@ const AddAndEditTopicModalContent = ({ modalVisible, setModalVisible, themeId, i
   );
 };
 
-export default AddAndEditTopicModalContent;
+export default ManageTopicModalContent;
 
