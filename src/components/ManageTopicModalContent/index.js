@@ -161,7 +161,21 @@ const ManageTopicModalContent = ({ modalVisible, setModalVisible, themeId, isEdi
       {isEditModal && (
         <TouchableOpacity
           style={styles.deleteButton}
-          onPress={() => deleteTopicService()}
+          onPress={() => {
+            Alert.alert(
+              'Deseja mesmo excluir esse tópico?','',
+              [
+                {
+                  text: 'Sim',
+                  onPress: () => deleteTopicService(),
+                },
+                {
+                  text: 'Não',
+                  onPress: () => {},
+                },
+              ]
+            );
+          }}
         >
         <Text style={styles.deleteText}>DELETAR TÓPICO</Text>
       </TouchableOpacity>

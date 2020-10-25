@@ -3,7 +3,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React from 'react';
 import firebase from 'firebase';
 import { Text, View } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { Avatar, TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import Button from '../../../components/UI/Button';
 import { colors } from '../../../styles';
@@ -27,6 +27,7 @@ const DrawerContent = ({ navigation }) => {
       <DrawerContentScrollView>
         <View style={styles.userInfo}>
           <Text style={styles.userName}>{user && user.displayName}</Text>
+
           {/* <Button
             buttonText="Editar perfil"
             width="90%"

@@ -18,7 +18,7 @@ const MainTabs = () => {
         },
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Search"
         component={SearchStack}
         options={{
@@ -31,7 +31,7 @@ const MainTabs = () => {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="MyLibrary"
         component={MyLibraryStack}

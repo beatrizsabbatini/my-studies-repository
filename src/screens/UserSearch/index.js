@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import firebase from 'firebase'
 import { Searchbar } from 'react-native-paper';
 
 import SearchBackgroundIcon from '../../../assets/icons/search-default-bg.svg';
 import SearchListItem from '../../components/SearchListItem';
 import BackgroundIconAndMessage from '../../components/UI/BackgroundIconAndMessage';
+import Message from '../../../assets/soon-functionality.png'
 import styles from './styles';
 
 const UserSearch = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState();
-
-  const mockUsers = []
 
   useEffect(() => {
     getUsers();
@@ -42,7 +41,8 @@ const UserSearch = ({ navigation }) => {
 
   return (
     <View style={styles.background}>
-      <Searchbar
+      <Image source={Message} style={{alignSelf: 'center'}} />
+      {/* <Searchbar
         style={styles.searchBar}
         inputStyle={styles.input}
         placeholder="Search"
@@ -75,7 +75,7 @@ const UserSearch = ({ navigation }) => {
         <BackgroundIconAndMessage message="Digite o nome de algum usuário">
           <SearchBackgroundIcon style={styles.backgroundIcon} />
         </BackgroundIconAndMessage>
-      )}
+      )} */}
     </View>
   );
 };

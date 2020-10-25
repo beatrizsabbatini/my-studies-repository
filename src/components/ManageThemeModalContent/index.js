@@ -183,7 +183,21 @@ const ManageThemeModalContent = ({ modalVisible, setModalVisible, isEdit, theme 
       {isEdit && (
          <TouchableOpacity
          style={styles.deleteButton}
-         onPress={() => deleteThemeService()}
+         onPress={() => {
+          Alert.alert(
+            'Deseja mesmo excluir esse tema?','',
+            [
+              {
+                text: 'Sim',
+                onPress: () => deleteThemeService(),
+              },
+              {
+                text: 'Não',
+                onPress: () => {},
+              },
+            ]
+          );
+        }}
        >
          <Text style={[styles.deleteText]}>Deletar Tema</Text>
        </TouchableOpacity>
