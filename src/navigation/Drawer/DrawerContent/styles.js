@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     color: colors.Purple,
     marginVertical: metrics.doubleBaseMargin,
   },
+  nameTitle:{
+    color: colors.Purple,
+    fontWeight: 'bold',
+    fontSize: fonts.big,
+    marginBottom: metrics.bigMargin
+  }
 });
 
 export default styles;
