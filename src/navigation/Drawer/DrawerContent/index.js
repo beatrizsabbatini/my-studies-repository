@@ -15,7 +15,8 @@ import { getMyTopicsSuccess } from '../../../store/ducks/myTopics';
 const DrawerContent = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = firebase.auth().currentUser;
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -41,11 +42,44 @@ const DrawerContent = ({ navigation }) => {
     setUserName('')
   }
 
+  const changeUserPhoto = async () => {
+    try {
+    await user.updateProfile({
+      photoURL: imageUrl
+    })
+    navigation.closeDrawer();
+    } catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <View style={styles.drawerBackground}>
       <DrawerContentScrollView>
         <View style={styles.userInfo}>
         <Text style={styles.nameTitle}>{user ? user.displayName : ''}</Text>
+        {user && user.photoURL ? (
+        <Avatar.Image
+        source={{uri: user.photoURL || ''}}
+        size={90}
+        />
+        ) : (
+        <Avatar.Image
+          source={require('../../../../assets/add-photo.png')}
+          size={90}
+        />
+        )}
+         <Text style={{color:colors.Purple, paddingTop: 20}}>Edite a url de sua foto de perfil abaixo:</Text>
+        <TextInput
+        style={{ height: 30, width: '100%', marginBottom: 20 }}
+        mode="outlined"
+        value={imageUrl}
+        onChangeText={(text) => setImageUrl(text)}
+        theme={{ colors: { primary: colors.Purple }}}
+        />
+         <TouchableOpacity onPress={() => changeUserPhoto()}>
+          <Text style={{color:colors.Purple, textDecorationLine: 'underline', paddingBottom: 20,}}>Salvar URL da foto</Text>
+        </TouchableOpacity>
         <Text style={{color:colors.Purple}}>Edite seu nome usuário abaixo:</Text>
         <TextInput
         style={{ height: 30, width: '100%', marginBottom: 20 }}
