@@ -15,8 +15,19 @@ YellowBox.ignoreWarnings(['Setting a timer']);
 const ManageReferenceModalContent = ({ modalVisible, setModalVisible, themeId, topicId, isEdit, reference }) => {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [filledBothInputs, setFilledBothInputs] = useState(false);
 
   const { currentUser } = firebase.auth();
+
+  useEffect(() => {
+    if (title && link){
+      if (title.length > 0 && link.length > 0){
+        setFilledBothInputs(true);
+      } else {
+        setFilledBothInputs(false);
+      }
+    }
+  }, [title, link])
 
   useEffect(() => {
     if (reference){
@@ -78,6 +89,7 @@ const ManageReferenceModalContent = ({ modalVisible, setModalVisible, themeId, t
       <TextInput
         style={{ height: 30, width: '100%', marginBottom: 20 }}
         mode="outlined"
+        
         label=""
         placeholder={reference.url || ''}
         value={link}
@@ -93,8 +105,8 @@ const ManageReferenceModalContent = ({ modalVisible, setModalVisible, themeId, t
           <Text style={[styles.cancel]}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={title == '' || link == ''}
-          style={[styles.button, styles.save, title == '' || link == '' && {opacity: 0.3}]}
+          disabled={!filledBothInputs}
+          style={[styles.button, styles.save, !filledBothInputs && {opacity: 0.3}]}
           onPress={() => {
             if (isEdit) {
               updateReferenceService()

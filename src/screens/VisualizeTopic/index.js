@@ -21,7 +21,7 @@ const VisualizeTopic = ({ route }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [reference, setReference] = useState();
 
-  const { themeId, topicId, item } = route.params;
+  const { themeId, topicId } = route.params;
   const { currentUser } = firebase.auth();
 
   const dispatch = useDispatch()
@@ -97,12 +97,14 @@ const VisualizeTopic = ({ route }) => {
                   <Ionicons name="ios-add-circle" size={34} color={colors.Purple}/>
                   <Text style={styles.title}>Adicionar Referência</Text>
               </TouchableOpacity>
+
               <FlatList 
                 keyExtractor={item => item.id.toString()} 
                 showsVerticalScrollIndicator={false}
                 data={referencesWithId || []} 
                 style={{paddingTop: 10}}
                 renderItem={({ item }) => (
+
                   <View style={styles.referenceContainer}>
                     <Text style={styles.itemTitle}>{item.title}</Text>
                       <TouchableOpacity onPress={() => Linking.openURL(item.url)} style={styles.accessButton}>

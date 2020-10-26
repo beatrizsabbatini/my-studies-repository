@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import firebase from 'firebase';
 import { TextInput } from 'react-native-paper';
 import { useSelector } from 'react-redux';
@@ -20,7 +19,6 @@ const ManageTopicModalContent = ({ modalVisible, setModalVisible, themeId, isEdi
   const [colorChosen, setColorChosen] = useState('red');
 
   const myReferences = useSelector(state => state.myReferences.references)
-  const navigation = useNavigation();
 
   const { currentUser } = firebase.auth();
 
@@ -67,7 +65,6 @@ const ManageTopicModalContent = ({ modalVisible, setModalVisible, themeId, isEdi
       .remove()
       .then(() => {
         setModalVisible(false);
-        navigation.goBack();
         Alert.alert('Sucesso!', 'Tópico deletado com sucesso.')
       }) 
   } catch(err){

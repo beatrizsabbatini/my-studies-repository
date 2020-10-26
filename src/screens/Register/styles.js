@@ -7,16 +7,7 @@ const styles = StyleSheet.create({
     padding: metrics.bigMargin,
     justifyContent: 'space-around',
     flex: 1,
-  },
-  textInput: {
-    width: '100%',
-    marginVertical: metrics.baseMargin,
-  },
-  errorMessage: {
-    color: colors.Red,
-    fontSize: fonts.small,
-    textAlign: 'center',
-  },
+  }
 });
 
 export default styles;

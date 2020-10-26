@@ -25,6 +25,10 @@ const ManageThemeModalContent = ({ modalVisible, setModalVisible, isEdit, theme 
     if (picture !== null && picture !== undefined){
       setImage(picture);
     }
+
+    if (isEdit){
+      setText(theme.title);
+    }
   }, [])
 
   const navigation = useNavigation();
